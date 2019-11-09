@@ -1,10 +1,16 @@
 # v2ray-config
-v2ray config
+方便自己生活与渗透测试的切换~
+
+通过switchysharp来使用这三种路由：
+1.1080端口：中国IP不走代理
+2.1081端口：所有都走代理
+3.1082端口：所有都走代理并且通过tor出去
 
 ## 环境配置
 
 - V2Ray 4.12.0 (Po) 20190112
 - TOR
+- switchysharp
 
 ## 说明
 
@@ -27,6 +33,8 @@ v2ray config
 5. 由于是vmess协议，所有客户端与服务端要同步。
 
 6. 如果想做透明代理，修改client.json其中的一个inbound为任意门协议，具体可以参加官网的配置。
+
+7. DNS可以使用https://github.com/holmium/dnsforwarder 来让dns over tcp，设置tor的socks端口出去，就更加隐藏自己了呢~
 
 ## 透明代理
 
