@@ -1,0 +1,130 @@
+{
+  "log": {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+	  //direct to tor
+      "port": 1082,
+      "tag": "tor",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
+      "settings": {
+        "auth": "noauth"
+      }
+    },
+    {
+	  //all direct to vps 
+      "port": 1081,
+      "tag": "alltovps",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ] 
+      },
+      "settings": {
+        "auth": "noauth"
+      }
+    },
+    {
+	  //no china ip direct to vps
+      "port": 1080,
+      "tag": "china",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
+      "settings": {
+        "auth": "noauth"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vmess",
+      "tag": "allout",
+      "settings": {
+        "vnext": [
+          {
+            "address": "vpsip",
+            "port": 22777,
+            "users": [
+              {
+                "id": "uuid",//与服务器22777保持一致
+                "alterId": 128
+              }
+            ]
+          }
+        ]
+      }
+    },
+	    {
+      "protocol": "vmess",
+      "tag": "torout",
+      "settings": {
+        "vnext": [
+          {
+            "address": "vpsip",
+            "port": 22778,
+            "users": [
+              {
+                "id": "uuid",//与服务器22778配置保持一致
+                "alterId": 128
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tag": "direct",
+      "settings": {},
+      "protocol": "freedom"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "inboundTag": [
+          "china"
+        ],
+        "type": "field",
+        "outboundTag": "direct",
+        "ip": [
+          "geoip:cn",
+          "geoip:private"
+        ]
+      },
+      {
+        "inboundTag": [
+          "alltovps"
+        ],
+        "type": "field",
+        "outboundTag": "allout"
+      },
+	        {
+        "inboundTag": [
+          "tor"
+        ],
+        "type": "field",
+        "outboundTag": "torout"
+      }
+    ]
+  }
+}
