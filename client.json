@@ -58,6 +58,17 @@
     {
       "protocol": "vmess",
       "tag": "allout",
+	           "streamSettings": {
+        "network": "mkcp",
+        "kcpSettings": {
+          "uplinkCapacity": 50,
+          "downlinkCapacity": 100,
+          "congestion": true,
+          "header": {
+            "type": "none"
+          }
+        }
+      },
       "settings": {
         "vnext": [
           {
@@ -76,6 +87,17 @@
 	    {
       "protocol": "vmess",
       "tag": "torout",
+		           "streamSettings": {
+        "network": "mkcp",
+        "kcpSettings": {
+          "uplinkCapacity": 50,
+          "downlinkCapacity": 100,
+          "congestion": true,
+          "header": {
+            "type": "none"
+          }
+        }
+      },
       "settings": {
         "vnext": [
           {
