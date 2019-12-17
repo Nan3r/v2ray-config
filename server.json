@@ -8,6 +8,17 @@
     {
       "protocol": "vmess",
       "port": 22777,
+                   "streamSettings": {
+        "network": "mkcp",
+        "kcpSettings": {
+          "uplinkCapacity": 50,
+          "downlinkCapacity": 100,
+          "congestion": true,
+          "header": {
+            "type": "none"
+          }
+        }
+      },
       "settings": {
         "clients": [
           {
@@ -21,6 +32,17 @@
       "protocol": "vmess",
       "port": 22778,
       "tag": "tor",
+                   "streamSettings": {
+        "network": "mkcp",
+        "kcpSettings": {
+          "uplinkCapacity": 50,
+          "downlinkCapacity": 100,
+          "congestion": true,
+          "header": {
+            "type": "none"
+          }
+        }
+      },
       "settings": {
         "clients": [
           {
